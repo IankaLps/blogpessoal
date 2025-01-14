@@ -5,9 +5,13 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  process.env.TZ = '-03:00'
+
+  // Habilitando globalmente a validação de dados
   app.useGlobalPipes(new ValidationPipe());
 
-  app.enableCors(); // -> aceito requisições de qualquer lugar
+  // Habilitando CORS na aplicaçãa
+  app.enableCors(); // CORS -> aceito requisições de qualquer lugar
 
   await app.listen(process.env.PORT ?? 4000);
 }
